@@ -1,4 +1,3 @@
-![Screenshot of MyDriver App](https://github.com/your-username/mydriver/assets/placeholder-image-link)
 
 # MyDriver
 
@@ -25,4 +24,4 @@ To get started with MyDriver, follow these steps:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/mydriver.git
+   git clone https://github.com/Emmyfrank/MyDriver.git
