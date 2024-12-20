@@ -1,0 +1,209 @@
+import { View, Text, StyleSheet, SafeAreaView, ImageBackground, TextInput, TouchableOpacity } from 'react-native'
+import React, { useLayoutEffect, useRef, useState } from 'react'
+import { useNavigation,Link } from '@react-navigation/native';
+import { Picker } from '@react-native-picker/picker';
+import { useFonts } from 'expo-font';
+export default function LoginSCreen() {
+
+    const [selectedCountryCode,setSelectedCountryCode]= useState("")
+
+    const navigator = useNavigation()
+
+
+    const pickerRef = useRef()
+
+    const open = () => {
+    if (pickerRef.current) {
+        //@ts-ignore
+        pickerRef.current.focus()
+    }
+    }
+        
+    const close = () => {
+        if (pickerRef.current) {
+            //@ts-ignore
+    pickerRef.current.blur()
+  }
+    }
+
+    useLayoutEffect(() => {
+
+        navigator.setOptions({
+            headerShown: false
+        })
+        
+    },[])
+    const [fontLoaded] = useFonts({
+        'Avenir': require('../assets/avenir_ff/AvenirLTStd-Book.otf'),
+        'Avenirbold': require('../assets/avenir_ff/AvenirLTStd-Black.otf'),
+        'Avenirroman': require('../assets/avenir_ff/AvenirLTStd-Roman.otf'),
+    })
+    if (!fontLoaded) return null;   
+
+  return (
+    <SafeAreaView style={styles.parent}>
+          <ImageBackground source={require("../assets/pexels-aboodi-13867737.jpg")} style={styles.header}>
+              <View  style={{padding:20}}>
+              <Text style={styles.headerText}>Glad to see you!!</Text>
+      </View>
+          </ImageBackground>
+          <View style={styles.content}>
+              <View style={styles.container}>
+                  
+                   <View style={styles.countryPicker}>
+                      {<Picker
+                          ref={pickerRef as any}
+                            selectedValue={selectedCountryCode}
+                            onValueChange={(itemValue) => setSelectedCountryCode(itemValue)}
+                          style={{width: 50, fontFamily:"Avenir",position:"relative"}}
+                          numberOfLines={1}
+                          
+                        >
+                            <Picker.Item label="+250 (Rwanda)" value="+250" />
+                            <Picker.Item label="+254 (Kenya)" value="+254" />
+                            <Picker.Item label="+255 (Tanzania)" value="+255" />
+                            <Picker.Item label="+256 (Burundi)" value="+256" />
+                            <Picker.Item label="+256 (Uganda)" value="+256" />
+                            <Picker.Item label="+211 (South Sudan)" value="+211" />
+                            
+                      </Picker>  }
+                      
+                       <TextInput placeholder='+250' style={styles.input}>
+                      
+              
+                  </TextInput>
+                    </View>
+                  
+                  
+                 
+                  <TextInput placeholder='Password' style={styles.input}>
+                    
+
+                  </TextInput>
+                  <Text style={styles.forgot}> <Link to={"/ForgetPass"}><Text>Forgot password ? </Text></Link><Text style={{ color: "red"}}>Retrieve</Text></Text>
+                  
+              </View>
+              <View>
+                  
+              </View>
+              <View style={styles.actions}>
+                  
+                  <TouchableOpacity style={styles.btn}>
+                      <Link to={"/comfirm-forger"}><Text style={styles.inner}>Login</Text></Link>
+                  </TouchableOpacity>
+
+                  <Text style={styles.acts}>Don't have account ? <Text style={{color:"red"}} onPress={()=>navigator.navigate("myDriveHome" as never)}>Sign up</Text></Text>
+                  
+              </View>
+             
+          </View>
+    </SafeAreaView>
+  )
+}
+
+
+const styles = StyleSheet.create({
+    parent: {
+        flex: 1,
+        backgroundColor: '#130F26',
+        alignItems: 'center',
+        flexDirection:"column",
+        height:60,
+    },
+
+    header: {
+        flex: 1,
+        // backgroundColor: 'red',
+        alignItems: 'center',
+        justifyContent: "flex-start",
+        flexDirection: "row",
+        width: "100%",
+
+        // padding: 20,
+        
+        
+    },
+
+    headerText: {
+        fontSize: 32,
+        fontFamily:"Avenirroman",
+        color: "green",
+        // fontFamily:"Avenir"
+        
+    },
+    content: {
+        flex: 2,
+        backgroundColor: '#F4F4FA',
+        alignItems: 'center',
+        justifyContent: 'space-around',
+        flexDirection: "column",
+
+        width: "100%",
+        // borderTopRightRadius: 38,
+        // borderTopLeftRadius: 38,
+        padding:20
+    },
+
+    container: {
+        width: "100%",
+        gap:10,
+        
+    },
+    input: {
+        width: "100%",
+        padding: 13,
+        borderRadius: 15,
+        backgroundColor: "white",
+        fontFamily:'Avenir',
+        fontSize:18,
+        color:"#2D2D2D",
+        height:60,
+
+    },
+
+    btn: {
+        backgroundColor: "green",
+        width: "100%",
+        justifyContent: "center",
+        alignItems: "center",
+        padding: 13,
+        borderRadius:15,
+        height:60,
+        
+    },
+
+    inner: {
+        color: "yellow",
+        fontFamily:'Avenir',
+        fontSize:20
+    } ,
+
+    actions: {
+        width:"100%"
+    },
+
+    acts: {
+        textAlign: "center",
+        marginTop: 10,
+        color: "#2D2D2D80",
+        fontFamily: 'Avenir',
+    },
+    forgot:
+        { marginLeft: "auto", color: "#2D2D2D80", fontSize: 14, fontFamily: "Avenir"},
+
+    countryPicker: {
+        width: "85%",
+        borderRadius: 15,
+        backgroundColor: "white",
+        marginBottom: 10,
+        flexDirection:"row",
+        fontFamily: "Avenir"
+    }
+    
+})
+
+// font-family: Avenir;
+// font-size: 32px;
+// font-weight: 500;
+// line-height: 43.71px;
+// text-align: left;
